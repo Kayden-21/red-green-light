@@ -1,0 +1,61 @@
+@import "main.css";
+
+main{
+    max-width: 400px;
+    width: 40vw;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--background-color);
+    box-shadow: 0 5 5rem var(--shadow-color);
+    border-radius: 2rem;
+}
+
+h1{
+    text-align: center;
+    margin: auto;
+}
+
+form section{
+    margin-bottom: 5%;
+}
+
+label{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 2%;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: calc(100% - 2rem);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--shadow-color);
+}
+
+button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border: none;
+    background-color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--dark-primary-color);
+}
+
+aside p{
+    margin-bottom: 0;
+    text-align: center;
+    font-style: italic;
+}
+
+aside p a{
+    color: var(--secondary-color);
+    font-weight: bolder;
+}
