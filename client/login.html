@@ -3,12 +3,17 @@
   <head>
     <title>Login</title>
     <link rel="stylesheet" type="text/css" href="css/login.css">
-    <!-- <script type="module" src="login.js"></script> -->
+    <script type="module" src="main.js"></script>
   </head>
   <body>
-    <main>
+
+
+    <main class="content">
+      <section id="loadingScreen">
+        <img src="static/loading-icon-secondary.png" alt="loading icon that contains a traffic light instead of an arrow">
+      </section>
       <h1>Login</h1>
-      <form>
+      <form id="loginForm">
         <section>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" placeholder="Enter your username" required>
@@ -17,12 +22,15 @@
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="Enter your password" required>
         </section>
+        <label id="errorText"></label>
         <button type="submit">Login</button>
       </form>  
       <aside>
         <p>Don't have an account? Sign up <a>here</a>.</p>
       </aside>
     </main>
+    <script src="home.js"></script>
+
   </body>
 </html>
 

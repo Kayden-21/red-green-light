@@ -1,0 +1,46 @@
+@import "main.css";
+
+main{
+    max-width: var(--max-width-large);
+    width: 40vw;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+h1{
+    color: var(--light-secondary-color);
+}
+
+button{
+    max-width: var(--max-width-medium);
+    margin-top: 1rem;
+}
+
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before {
+    content:"";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, transparent 0%, var(--background-color-transparent) 50%, transparent 100%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+
