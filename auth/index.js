@@ -2,10 +2,21 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const { dbConnection } = require('./api');
-var bouncer = require ("express-bouncer")(900000, 900000, 3);
+const bouncer = require ('express-bouncer')(900000, 900000, 3);
+const getSecrets = require('./getSecrets') 
 
 const app = express();
 app.use(bodyParser.json());
+
+let jwtToken;
+
+getSecrets.getSecret("prod/redgreenlight/jwt")
+.then((secretValue) => {
+  jwtToken = secretValue;
+})
+.catch((error) => {
+  console.error("Error retrieving secret:", error);
+});
 
 bouncer.blocked = function (req, res, next, remaining)
 {
@@ -35,7 +46,7 @@ app.post('/auth', bouncer.block, (req, res) => {
   }
   
   // Generate JWT token with a secret key
-  const token = jwt.sign({ userId: user.id }, '6b9d56e33e9428a65a669bde925193d588b2657c', { expiresIn: '1h' });
+  const token = jwt.sign({ userId: user.id }, jwtToken, { expiresIn: '1h' });
   
   // Return the JWT token to the client
   res.json({ token });
