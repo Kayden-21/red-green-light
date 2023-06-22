@@ -2,17 +2,23 @@
 <html lang="en">
   <head>
     <title>Play</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="The game page for 'Redlight Greenlight'; the online version of the original children's game.">
     <link rel="stylesheet" type="text/css" href="css/play.css">
     <script type="module" src="play.js"></script>
   </head>
   <body>
     <main class="container">
+      <section id="loadingScreen">
+        <img src="static/loading-icon-secondary.png" alt="loading icon that contains a traffic light instead of an arrow">
+      </section>
       <img id="trafficLightImage" src="static/traffic-light-red.png" alt="Basic vector image of a traffic light">
       <section>
         <h1>Click Counter</h1>
-        <p>Clicks: <span id="counter">0</span></p>
-        <p>Time Remaining: <span id="timer">10</span> seconds</p>
-        <button id="startButton">Start</button>
+        <h2>Clicks: <span id="counter">0</span></h2>
+        <h2>Time Remaining: <span id="timer">10</span> seconds</h2>
+        <button id="startButton" class="shimmer">Start</button>
         <button id="quitButton">Quit</button>
       </section>
       

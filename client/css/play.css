@@ -8,7 +8,7 @@ main{
 
 main img{
     width: 40vw;
-    max-width: var(--max-width-small);
+    max-width: 30rem;
 }
 
 img.flashing{
