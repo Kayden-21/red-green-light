@@ -1,9 +1,9 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const { dbConnection } = require('./api');
 const bouncer = require ('express-bouncer')(900000, 900000, 3);
 const getSecrets = require('./getSecrets') 
-
 
 const app = express();
 app.use(bodyParser.json());
