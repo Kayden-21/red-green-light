@@ -1,0 +1,25 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Resources:
+  AuthDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: mysql
+      DBInstanceIdentifier: AuthDatabase
+      AllocatedStorage: 5
+      DBInstanceClass: db.t2.micro
+      EngineVersion: 5.7
+      MasterUsername: admin
+      MasterUserPassword: redgreenlight123
+      PubliclyAccessible: false
+
+  GameDatabase:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: mysql
+      DBInstanceIdentifier: GameDatabase
+      AllocatedStorage: 5
+      DBInstanceClass: db.t2.micro
+      EngineVersion: 5.7
+      MasterUsername: admin
+      MasterUserPassword: redgreenlight123
+      PubliclyAccessible: false

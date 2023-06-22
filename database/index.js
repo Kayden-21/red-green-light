@@ -19,6 +19,8 @@ const scripts = [
     login_id INT AUTO_INCREMENT,
     login_username VARCHAR(255),
     login_password VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(login_id)
   )`,
   `INSERT INTO login (login_username, login_password) 
