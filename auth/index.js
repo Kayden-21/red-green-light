@@ -7,8 +7,6 @@ var bouncer = require ("express-bouncer")(900000, 900000, 3);
 const app = express();
 app.use(bodyParser.json());
 
-console.log(dbConnection);
-
 bouncer.blocked = function (req, res, next, remaining)
 {
     res.status(429, "Too many requests have been made, " +
