@@ -19,7 +19,6 @@ section{
     align-self: center;
 }
 
-
 @keyframes flashAnimation {
     0%, 50%, 100% {
         opacity: 0;
@@ -28,3 +27,10 @@ section{
         opacity: 1;
     }
 }
+
+button.disabled{
+    background-color: var(--dark-primary-color);
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
+  }
