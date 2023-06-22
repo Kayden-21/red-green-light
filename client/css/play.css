@@ -12,6 +12,10 @@ main img{
     padding: 5%;
 }
 
+h2{
+    text-align: center;
+}
+
 img.flashing{
     animation: flashAnimation 0.5s ease-in-out infinite;
 }
