@@ -7,7 +7,7 @@ function hideLoadingScreen() {
   loadingSection.classList.remove("display");
 }
 hideLoadingScreen();
-// LOADING SCREEN --------------------------------------------------
+// END OF LOADING SCREEN -------------------------------------------
 
 const loginForm = document.getElementById("loginForm");
 const errorText = document.getElementById("errorText");

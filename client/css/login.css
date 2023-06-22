@@ -1,11 +1,11 @@
 @import "main.css";
-
 form{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 form section{
     width: 100%;
     max-width: 30rem;
@@ -42,4 +42,3 @@ form p a{
     color: var(--dark-primary-color);
     font-weight: bold;
 }
-

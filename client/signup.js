@@ -7,7 +7,7 @@ function hideLoadingScreen() {
   loadingSection.classList.remove("display");
 }
 hideLoadingScreen();
-// LOADING SCREEN --------------------------------------------------
+// END OF LOADING SCREEN -------------------------------------------
 
 console.log("WTF");
 const signupButton = document.getElementById("signupButton");
@@ -37,62 +37,54 @@ function hasNumber(text){
 }
 
 function testMinLength(text, len){
-  if(text.length >= len){
-    return true;
-  }
-  return false;
+  return text.length >= len;
 }
 
 function testMaxLength(text, len){
-  if(text.length <= len){
-    return true;
-  }
-  return false;
+  return text.length <= len;
 }
 
 function signup(event) {
-    displayLoadingScreen();
-  
-    event.preventDefault(); // Prevent form submission from reloading the page
-    if(userName.value == "" || userPassword.value == ""){
-      errorText.innerText = "Please fill in both fields.";
+  displayLoadingScreen();
+
+  event.preventDefault(); // Prevent form submission from reloading the page
+  if(userName.value == "" || userPassword.value == ""){
+    errorText.innerText = "Please fill in both fields.";
+    hideLoadingScreen();
+    return;
+  }
+
+  if(!hasSpecialChars(userPassword.value) || !hasUppercase(userPassword.value) || !hasLowercase(userPassword.value) || !hasNumber(userPassword.value)){
+    console.log("HELLO");
+    errorText.innerText = "Please ensure your password has at least one lowercase letter, capital letter and special character.";
+    hideLoadingScreen();
+    return;
+  }
+
+  if(!testMinLength(userPassword.value, 10)){
+    errorText.innerText = "Please ensure your password is at least 10 characters in length.";
+    hideLoadingScreen();
+    return;
+  }
+
+  if(!testMaxLength(userPassword.value, 255) || !testMaxLength(userName.value, 255)){
+    errorText.innerText = "Please ensure your username and password are less than 255 characters in length.";
+    hideLoadingScreen();
+    return;
+  }
+  try {
+    // const response = await userService.login(userName.value, userPassword.value); // user35
+    // const data = await response.json();
+
+    setTimeout(function() {
+        window.location.href = "login.html";
+    }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
+
+    errorText.innerText = "";
+  }catch (error) {
+      errorText.innerText = "Invalid login details.";
       hideLoadingScreen();
-      return;
-    }
-
-    if(!hasSpecialChars(userPassword.value) || !hasUppercase(userPassword.value) || !hasLowercase(userPassword.value) || !hasNumber(userPassword.value)){
-      console.log("HELLO");
-      errorText.innerText = "Please ensure your password has at least one lowercase letter, capital letter and special character.";
-      hideLoadingScreen();
-      return;
-    }
-
-    if(!testMinLength(userPassword.value, 10)){
-      errorText.innerText = "Please ensure your password is at least 10 characters in length.";
-      hideLoadingScreen();
-      return;
-    }
-
-    if(!testMaxLength(userPassword.value, 255) || !testMaxLength(userName.value, 255)){
-      errorText.innerText = "Please ensure your username and password are less than 255 characters in length.";
-      hideLoadingScreen();
-      return;
-    }
-    try {
-      // const response = await userService.login(userName.value, userPassword.value); // user35
-      // const data = await response.json();
-
-      setTimeout(function() {
-          window.location.href = "login.html";
-      }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
-
-
-      errorText.innerText = "";
-    } catch (error) {
-        errorText.innerText = "Invalid login details.";
-        hideLoadingScreen();
-    }
-
+  }
 }
 
 signupButton.addEventListener("click", signup);

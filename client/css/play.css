@@ -1,6 +1,5 @@
 @import "main.css";
 @import "home.css";
-
 main{
     width: 80vw;
     flex-wrap: wrap;
@@ -8,7 +7,9 @@ main{
 
 main img{
     width: 40vw;
-    max-width: 30rem;
+    max-width: 20rem;
+    max-height: 20rem;
+    padding: 5%;
 }
 
 img.flashing{
@@ -19,7 +20,13 @@ section{
     align-self: center;
 }
 
-@keyframes flashAnimation {
+#counterElements{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+@keyframes flashAnimation{
     0%, 50%, 100% {
         opacity: 0;
     }
@@ -33,4 +40,4 @@ button.disabled{
     cursor: default;
     pointer-events: none;
     opacity: 0.5;
-  }
+}

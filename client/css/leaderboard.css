@@ -1,0 +1,67 @@
+@import "main.css";
+main{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+button{
+    max-width: 30rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+  
+#leaderboardSection{
+    width: 100%;
+    max-width: 30rem;
+    overflow-y: auto;
+}
+
+#leaderboard{
+    width: 100%;
+    border-collapse: collapse;
+    max-height: 10rem;
+}
+
+#leaderboard th, #leaderboard td{
+    padding: 0.7rem;
+    text-align: left;
+}
+
+#leaderboard td:nth-child(2), #leaderboard th:nth-child(2){
+    text-align: center;
+}
+
+#leaderboard td:nth-child(3), #leaderboard th:nth-child(3){
+    text-align: right;
+}
+
+#leaderboard th{
+    background-color: var(--light-secondary-color);
+    font-weight: bold;
+}
+
+#leaderboard td.rank{
+    font-weight: bold;
+}
+
+#leaderboard tr.user-row{
+    background-color: var(--secondary-color);
+    color: var(--light-secondary-color);
+}
+
+#leaderboard thead th:first-child{
+    border-top-left-radius: 0.5rem;
+}
+
+#leaderboard thead th:last-child{
+    border-top-right-radius: 0.5rem; 
+}
+
+#leaderboard tbody tr.user-row td:nth-child(1){
+    border-bottom-left-radius: 0.5rem;
+}
+
+#leaderboard tbody tr.user-row td:nth-child(3){
+    border-bottom-right-radius: 0.5rem;
+}

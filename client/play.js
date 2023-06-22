@@ -6,7 +6,7 @@ function displayLoadingScreen() {
 function hideLoadingScreen() {
   loadingSection.classList.remove("display");
 }
-// LOADING SCREEN --------------------------------------------------
+// END OF LOADING SCREEN -------------------------------------------
 
 let counterElement = document.getElementById("counter");
 let livesElement = document.getElementById("lives");
@@ -51,7 +51,6 @@ function startGame() {
     startButton.classList.add("disabled");
     startButton.classList.remove("shimmer");
     quitButton.classList.add("disabled");
-    quitButton.classList.remove("shimmer");
 
     let countdown = setInterval(function () {
       timeLeft--;
@@ -64,7 +63,6 @@ function startGame() {
         startButton.classList.remove("disabled");
         startButton.classList.add("shimmer");
         quitButton.classList.remove("disabled");
-        quitButton.classList.add("shimmer");
       }
 
       if(isRed){
@@ -106,7 +104,6 @@ startButton.addEventListener("click", startGame);
 document.addEventListener("mousedown", incrementCounter);
 document.addEventListener("touchstart", incrementCounter);
   
-
 hideLoadingScreen();
 resetGame();
 
@@ -123,4 +120,10 @@ function flashTrafficLight(milliseconds, color) {
 function solidTrafficLight(color){
   trafficLight.src = "static/traffic-light-" + color + ".png";
   trafficLight.classList.remove("flashing");
+}
+
+if(quitButton != null){
+  quitButton.addEventListener("click", function () {
+        window.location.href = "home.html";
+    });
 }
