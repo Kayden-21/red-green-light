@@ -1,0 +1,28 @@
+{
+  "name": "red-green-light-server",
+  "version": "1.0.0",
+  "description": "Red Light Green Light Server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kayden-21/red-green-light.git"
+  },
+  "keywords": [
+    "red",
+    "green",
+    "light"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kayden-21/red-green-light/issues"
+  },
+  "homepage": "https://github.com/Kayden-21/red-green-light#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "express": "^4.18.2"
+  }
+}
