@@ -1,11 +1,11 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
+const { dbConnection } = require('./api');
 var bouncer = require ("express-bouncer")(900000, 900000, 3);
 
 const app = express();
 app.use(bodyParser.json());
-
 
 bouncer.blocked = function (req, res, next, remaining)
 {
