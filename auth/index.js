@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const { dbConnection } = require('./api');
 const bouncer = require ('express-bouncer')(900000, 900000, 3);
 const getSecrets = require('./getSecrets') 
+const hash = require('./hash/hash')
 
 const app = express();
 app.use(bodyParser.json());
@@ -32,11 +33,17 @@ const users = [
 
 
 // Authentication endpoint
-app.post('/auth', bouncer.block, (req, res) => {
+app.post('/login', bouncer.block, (req, res) => {
   const { username, password } = req.body;
   
   // Mock user authentication
   const user = users.find((u) => u.username === username && u.password === password);
+
+  //Get encrypyed password from db
+
+  //Compare password from request with encrypted password from db
+  // can use this code
+  // const doesMatch = await hash.verifyPassword(password,encryptedPassword);
   
   if (!user) {
     return res.status(401).json({ error: 'Invalid credentials' });
@@ -51,6 +58,19 @@ app.post('/auth', bouncer.block, (req, res) => {
   // Return the JWT token to the client
   res.json({ token });
 });
+
+app.post('/register', bouncer.block, async (req, res) => {
+  const { username, password } = req.body;
+  
+  //first check if user exists in db
+
+  //if it does encrypt password to be stored
+  const encryptedPassword = await hash.encrypt(password);
+
+  //store in db afterwards
+
+});
+
 
 // Start the server
 const port = 4000;
