@@ -1,5 +1,16 @@
 AWSTemplateFormatVersion: '2010-09-09'
+
 Resources:
+  AuthDatabasePasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Secret for the AuthDatabase master user password
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "admin"}'
+        GenerateStringKey: "password"
+        PasswordLength: 8
+        ExcludeCharacters: '"@/\'
+
   AuthDatabase:
     Type: AWS::RDS::DBInstance
     Properties:
@@ -7,10 +18,20 @@ Resources:
       DBInstanceIdentifier: AuthDatabase
       AllocatedStorage: 5
       DBInstanceClass: db.t2.micro
-      EngineVersion: 5.7
+      EngineVersion: 8.0
       MasterUsername: admin
-      MasterUserPassword: redgreenlight123
+      MasterUserPassword: !Ref AuthDatabasePasswordSecret
       PubliclyAccessible: false
+
+  GameDatabasePasswordSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: Secret for the GameDatabase master user password
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "admin"}'
+        GenerateStringKey: "password"
+        PasswordLength: 8
+        ExcludeCharacters: '"@/\'
 
   GameDatabase:
     Type: AWS::RDS::DBInstance
@@ -19,7 +40,7 @@ Resources:
       DBInstanceIdentifier: GameDatabase
       AllocatedStorage: 5
       DBInstanceClass: db.t2.micro
-      EngineVersion: 5.7
+      EngineVersion: 8.0
       MasterUsername: admin
-      MasterUserPassword: redgreenlight123
+      MasterUserPassword: !Ref GameDatabasePasswordSecret
       PubliclyAccessible: false
