@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-
 const gameRouter = express.Router();
 
 gameRouter.get('/', async function (req, res) {

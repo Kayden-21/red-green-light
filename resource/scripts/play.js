@@ -102,6 +102,8 @@ function incrementCounter() {
 
 startButton.addEventListener("click", startGame);
 document.addEventListener("mousedown", incrementCounter);
+
+// NB!! NEED TO CHECK IF THIS MAKES A "DOUBLE CLICK"
 document.addEventListener("touchstart", incrementCounter);
   
 hideLoadingScreen();
