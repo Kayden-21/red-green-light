@@ -90,10 +90,10 @@ function startGame() {
 
 function incrementCounter() {
   if (isRunning) {
-    if(trafficLight.getAttribute('src') == "static/traffic-light-red.png"){
+    if(trafficLight.getAttribute('src') == "../static/traffic-light-red.png"){
       lives--;
       livesElement.textContent = lives;
-    }else if(trafficLight.getAttribute('src') == "static/traffic-light-green.png"){
+    }else if(trafficLight.getAttribute('src') == "../static/traffic-light-green.png"){
       counter++;
       counterElement.textContent = counter;  
     }
@@ -108,17 +108,17 @@ hideLoadingScreen();
 resetGame();
 
 function flashTrafficLight(milliseconds, color) {
-  trafficLight.src = "static/traffic-light-" + color + ".png";
+  trafficLight.src = "../static/traffic-light-" + color + ".png";
   trafficLight.classList.add("flashing");
 
   setTimeout(function() {
-    trafficLight.src = "static/traffic-light.png";
+    trafficLight.src = "../static/traffic-light.png";
     trafficLight.classList.remove("flashing");
   }, milliseconds);
 }
 
 function solidTrafficLight(color){
-  trafficLight.src = "static/traffic-light-" + color + ".png";
+  trafficLight.src = "../static/traffic-light-" + color + ".png";
   trafficLight.classList.remove("flashing");
 }
 
