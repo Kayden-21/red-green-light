@@ -28,9 +28,9 @@ let isRed;
 function resetGame(){
   lives = 3;
   counter = 0;
-  timeLeft = 60;
-  redTimeLeft = 40;
-  greenTimeLeft = 20;
+  timeLeft = 20;
+  redTimeLeft = 11;
+  greenTimeLeft = 9;
   isRunning = false;
   isRed = true;
   resetRandomTimeInterval();
@@ -50,7 +50,6 @@ function startGame() {
     counterElement.textContent = counter;
     startButton.classList.add("disabled");
     startButton.classList.remove("shimmer");
-    quitButton.classList.add("disabled");
 
     let countdown = setInterval(function () {
       timeLeft--;
@@ -62,7 +61,6 @@ function startGame() {
         isRunning = false;
         startButton.classList.remove("disabled");
         startButton.classList.add("shimmer");
-        quitButton.classList.remove("disabled");
       }
 
       if(isRed){
