@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
 const { dbConnection } = require('./api');
-const bouncer = require('express-bouncer')(900000, 900000, 3);
+const bouncer = require('express-bouncer')(900000, 900000, 20);
 const getSecrets = require('./getSecrets') 
 const hash = require('./hash/hash')
 const db = require('./db/db')
@@ -23,7 +23,8 @@ bouncer.blocked = function (req, res, _, remaining) {
 
 async function initializeJwtToken() {
   try {
-    jwtToken = await getSecrets.getSecret("prod/redgreenlight/jwt");
+    const jwtObject = await getSecrets.getSecret("prod/redgreenlight/jwt");
+    jwtToken = JSON.parse(jwtObject).jwt_token;
   } catch(error) {
     console.error("Error retrieving secret:", error);
   }
@@ -37,11 +38,10 @@ app.post('/login', bouncer.block, [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ error: {errors: errors.array() }});
   }
 
   const { username, password } = req.body;
-
   try {
     if (!await db.doesUserExist(username) || !await hash.verifyPassword(password, await db.getUserPassword(username))) {
       return res.status(401).json({ error: 'Invalid User or Credentials' });
@@ -61,7 +61,7 @@ app.post('/register', bouncer.block, [
 ], async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.status(400).json({ error: {errors: errors.array() }});
   }
 
   const { username, password } = req.body;
