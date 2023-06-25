@@ -19,24 +19,42 @@ app.use(session({
     saveUninitialized: true
 }));
 
+app.get('/leaderboards', async (req, res) => {
+  try {
+    const leaderboard = await db.getLeaderboard();
+
+    res.json(leaderboard);
+  } catch (error) {
+
+    return res.status(500).send(error);
+  }
+});
+
+
+app.post('/leaderboards', async (req, res) => {
+  try {
+
+    const { username, score } = req.body;
+
+    const success = db.submitGame(username, score);
+
+    if (success) {
+      res.status(200).send('Successfully submitted game');
+      return;
+    }
+
+    res.status(500).send('Error submitting game');
+  } catch (error) {
+
+    return res.status(500).send(error);
+  }
+});
+
 const homeRoute = require('./routes/homeRoute');
 app.use('/Home', homeRoute);
 
 const gameRoute = require('./routes/playRoute');
 app.use('/Play', gameRoute);
-
-app.get('/leaderboards', async (req, res) => {
-  try {
-
-    const leaderboard = await db.getLeaderboard();
-
-    res.json(leaderboard);
-    return;
-  } catch (error) {
-
-    res.status(500).send(error);
-  }
-});
 
 const leaderboardRoute = require('./routes/leaderboardRoute');
 app.use('/Leaderboard', leaderboardRoute);

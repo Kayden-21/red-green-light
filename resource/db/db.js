@@ -46,19 +46,21 @@ async function submitGame(username, score) {
 
     if (numericScore === NaN) {
       console.error('Score needs to be a number');
-      return;
+      return false;
     }
 
-    connection.query(insertQuery, [username, ], (error, results) => {
+    connection.query(insertQuery, [username, numericScore], (error, results) => {
       if (error) {
         console.error('Error executing the insert statement:', error);
-        return;
+        return false;
       }
       console.log('Inserted successfully:', results);
+      return true;
     });
 
   } catch (error) {
     console.error('Error submitting game:', error);
+    return false;
   }
 }
 

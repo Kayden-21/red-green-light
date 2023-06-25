@@ -42,7 +42,6 @@ app.post('/login', bouncer.block, [
   }
 
   const { username, password } = req.body;
-  console.log("BODY: ", req.body);
   try {
     if (!await db.doesUserExist(username) || !await hash.verifyPassword(password, await db.getUserPassword(username))) {
       return res.status(401).json({ error: 'Invalid User or Credentials' });
