@@ -1,34 +1,27 @@
 let url = "http://localhost:4000";
-export const userService = {
+const userService = {
     login: async ({username, password}) => {
-        const toSend = {
-            username,
-            password
-        }
-        const body = JSON.stringify(toSend);
         const result = await fetch(
             url + '/login', 
             {
                 method: "POST",
-                body
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({username, password})
             }
         );
-        return result
+        return await result.json();
     },
     signup: async ({username, password}) => {
-        const toSend = {
-            username,
-            password
-        }
-        const body = JSON.stringify(toSend);
         const result = await fetch(
             url + '/register', 
             {
                 method: "POST",
-                body
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({username, password})
             }
         );
-        return result
+        return await result.json();
     },
+};
 
-}
+module.exports = userService;

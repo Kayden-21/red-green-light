@@ -14,7 +14,8 @@
         <img src="./loading-icon-secondary.png" alt="loading icon that contains a traffic light instead of an arrow">
       </section>
       <h1>Login</h1>
-      <form id="loginForm">
+      <form action="Login" method="post" id="loginForm">
+      <!-- <form id="loginForm"> -->
         <section>
           <label for="username">Username</label>
           <input type="text" id="username" name="username" placeholder="Enter your username">
@@ -25,7 +26,7 @@
         </section>
         <section>
           <label id="errorText">   </label>
-          <button>Login</button>
+          <button type="submit">Login</button>
           <p>Don't have an account? Sign up <a href="/Signup">here</a>.</p>  
         </section>
       </form>  
