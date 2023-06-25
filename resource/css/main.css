@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC');
+:root{
+    --primary-color: #33c6b0;
+    --dark-primary-color: #2a9c8b;
+    --secondary-color: #8C546E;
+    --dark-secondary-color: #901a51;
+    --light-secondary-color: #ece2e7;
+    --shadow-color: #B9C7CB;
+    --shadow-color-dark-transparent: #2528295e;
+    --font-color: #000000;
+    --background-color: #FFFFFF;
+    --main-font:"Arial Rounded MT Bold", Arial, Helvetica, sans-serif;
+    --accent-font: 'Amatic SC', serif;
+    --background-color-transparent: #ece2e797;
+}
+
+[dark-mode="dark"]{
+    --primary-color: #9CBFAA;
+    --dark-primary-color: #557772;
+    --secondary-color: #8C546E;
+    --dark-secondary-color: #700A15;
+    --shadow-color: #B9C7CB;
+    --font-color: #FFFFFF;
+    --background-color: #000000;    
+    --background-color-transparent: rgba(0, 0, 0, 0.75);
+}
+
+html,
+body{
+    height: 100%;
+    width: 100%;
+    font-family: var(--main-font);
+    color: var(--font-color);
+    background: linear-gradient(to bottom, var(--dark-primary-color), var(--dark-secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+main{
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+h1{
+    color: var(--light-secondary-color);
+    margin: 0;
+    font-family: var(--accent-font);
+    font-size: calc(2vw + 2vh + 2rem);
+    text-align: center;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+button{
+    width: 100%;    
+    max-width: 30rem;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border: none;
+    background-color: var(--primary-color);
+    font-size: 1.5rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 4px var(--shadow-color-dark-transparent);
+}
+
+button:hover{
+    background-color: var(--dark-primary-color);
+}
+
+.swipe{
+    background: linear-gradient(to right, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+    animation: shimmer 2s;
+    z-index: 9999;
+}
+  
+@keyframes shimmer{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}
+
+#loadingScreen{
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    box-shadow: 0 0 40px 10px #000000;
+    background: radial-gradient(var(--background-color) 0%, var(--background-color-transparent) 20%, transparent 80%);
+}
+
+#loadingScreen.display{
+    display: flex;
+    align-self: center;
+}
+
+#loadingScreen img{
+    width: 20%;
+    display: flex;
+    align-self: center;
+    margin: auto;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin{
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.shimmer{
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::before{
+    content:"";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(to right, transparent 0%, var(--background-color-transparent) 50%, transparent 100%);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer{
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
