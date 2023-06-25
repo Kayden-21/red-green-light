@@ -77,7 +77,7 @@ function signup(event) {
     // const data = await response.json();
 
     setTimeout(function() {
-        window.location.href = "login.html";
+        window.location.href = "/Login";
     }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
 
     errorText.innerText = "";

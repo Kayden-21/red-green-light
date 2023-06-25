@@ -1,0 +1,24 @@
+{
+  "name": "Redlight Greenlight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "\"git+https://github.com/Kayden-21/red-green-light.git\""
+  },
+  "keywords": [
+    "game",
+    "red",
+    "green",
+    "light"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "path": "^0.12.7"
+  }
+}

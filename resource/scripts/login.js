@@ -29,7 +29,7 @@ function login(event) {
       // const data = await response.json();
 
       setTimeout(function() {
-          window.location.href = "home.html";
+          window.location.href = "/Home";
       }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
 
 

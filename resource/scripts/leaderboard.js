@@ -42,6 +42,6 @@ leaderboardData.forEach((data, index) => {
 const homeButton = document.getElementById("homeButton");
 if(homeButton != null){
     homeButton.addEventListener("click", function () {
-        window.location.href = "home.html";
+        window.location.href = "/Home";
     });
 }
