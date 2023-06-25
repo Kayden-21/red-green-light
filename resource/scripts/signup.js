@@ -9,9 +9,7 @@ function hideLoadingScreen() {
 hideLoadingScreen();
 // END OF LOADING SCREEN -------------------------------------------
 
-console.log("WTF");
 const signupButton = document.getElementById("signupButton");
-console.log(signupButton);
 const errorText = document.getElementById("errorText");
 const userName = document.getElementById("username");
 const userPassword = document.getElementById("password");
@@ -55,7 +53,6 @@ function signup(event) {
   }
 
   if(!hasSpecialChars(userPassword.value) || !hasUppercase(userPassword.value) || !hasLowercase(userPassword.value) || !hasNumber(userPassword.value)){
-    console.log("HELLO");
     errorText.innerText = "Please ensure your password has at least one lowercase letter, capital letter and special character.";
     hideLoadingScreen();
     return;

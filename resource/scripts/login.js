@@ -15,38 +15,33 @@ const userName = document.getElementById("username");
 const userPassword = document.getElementById("password");
 
 async function login(event) {
-    displayLoadingScreen();
-    event.preventDefault(); // Prevent form submission from reloading the page'
+  displayLoadingScreen();
+  event.preventDefault(); // Prevent form submission from reloading the page'
 
-    if(userName.value == "" || userPassword.value == ""){
-      errorText.innerText = "Please fill in both fields.";
-      hideLoadingScreen();
-      return;
-    }
-    const username = userName.value;
-    const password = userPassword.value;
-  
-    try {
-    const result = await fetch(
-      "/Login",
-      {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({username, password})
-      }
-    );
-    const response = await result.json();
-    if(response.error){
-      errorText.innerText = response.error;
-      hideLoadingScreen();
-    }else{
-      sessionStorage.setItem("accessToken", response);      
-      errorText.innerText = "Successful login";
-      window.location.href = "/Home";
-    }
-  } catch (error) {
-    errorText.innerText = "Invalid login details.";
+  if(userName.value == "" || userPassword.value == ""){
+    errorText.innerText = "Please fill in both fields.";
     hideLoadingScreen();
+    return;
+  }
+  const username = userName.value;
+  const password = userPassword.value;
+
+  const result = await fetch(
+    "/Login",
+    {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({username, password})
+    }
+  );
+  const response = await result.json();
+  if(response.error){
+    errorText.innerText = response.error;
+    hideLoadingScreen();
+  }else{
+    // sessionStorage.setItem("accessToken", response);  
+    errorText.innerText = "Successful login";
+    window.location.href = "/Home";
   }
 }
 

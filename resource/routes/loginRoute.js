@@ -1,26 +1,23 @@
 const express = require('express');
 const path = require('path');
 const userService = require('../services/userServices');
+const loginRouter = express.Router();
 
-const loginRoute = express.Router();
-
-loginRoute.get('/', function (req, res) {
-    // check if VALID logged in -> go to home
-    // if not -> 
-    res.sendFile(path.join(__dirname, '../views/login.html'));
+loginRouter.get('/', async function (req, res) {
+    return res.sendFile(path.join(__dirname, '../views/login.html'));
 });
 
-loginRoute.post('/', async function (req, res) {
-
+loginRouter.post('/', async function (req, res) {
     const result = await userService.login(req.body);
-    
     if(result.error){
         const error = result.error;
         return res.status(401).json({ error });
     }else{
-        const token = await userService.verifyToken(result.token); 
-        if(token.error){
-            const error = token.error;
+        const token = result.token;
+        req.session.token = token;
+        const verifiedToken = await userService.verifyToken(token); 
+        if(verifiedToken.error){
+            const error = verifiedToken.error;
             return res.status(401).json({error});
         }else{
             return res.status(200).json({token});
@@ -28,5 +25,4 @@ loginRoute.post('/', async function (req, res) {
     }
 });
 
-
-module.exports = loginRoute;
+module.exports = loginRouter;

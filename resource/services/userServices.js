@@ -30,7 +30,7 @@ const userService = {
             const decoded = jwt.verify(token, "6b9d56e33e9428a65a669bde925193d588b2657c");
             return decoded; 
         }catch(error){
-            return error;
+            return {error};
         }
     },
 };
