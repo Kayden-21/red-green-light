@@ -66,11 +66,14 @@ app.get('/', (req, res) => {res.redirect('/Login');});
 app.post('/Login', loginRoute)
 
 const signupRoute = require('./routes/signupRoute');
+const userService = require('./services/userServices');
 app.use('/Signup', signupRoute);
 
 app.use(express.static('scripts'));
 app.use(express.static('images'));
 app.use(express.static('css'));
+
+
 
 const server = http.createServer(app);
 

@@ -16,42 +16,38 @@ const userPassword = document.getElementById("password");
 
 async function login(event) {
     displayLoadingScreen();
-    // event.preventDefault(); // Prevent form submission from reloading the page'
+    event.preventDefault(); // Prevent form submission from reloading the page'
 
-    // if(userName.value == "" || userPassword.value == ""){
-    //   errorText.innerText = "Please fill in both fields.";
-    //   hideLoadingScreen();
-    //   return;
-    // }
-    // const username = userName.value;
-    // const password = userPassword.value;
+    if(userName.value == "" || userPassword.value == ""){
+      errorText.innerText = "Please fill in both fields.";
+      hideLoadingScreen();
+      return;
+    }
+    const username = userName.value;
+    const password = userPassword.value;
   
-    // try {
-    //   const result = await fetch(
-    //     "./Login",
-    //     {
-    //         method: "POST",
-    //         headers: {"Content-Type": "application/json"},
-    //         body: JSON.stringify({username, password})
-    //     }
-    // );
-    // const response = await result.json();
-    // if(response.error){
-
-    // }
-    // const token = 
-    
-
-    //   setTimeout(function() {
-    //       window.location.href = "/Home";
-    //   }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
-
-
-    //   errorText.innerText = "";
-    // } catch (error) {
-    //     errorText.innerText = "Invalid login details.";
-    //     hideLoadingScreen();
-    // }
+    try {
+    const result = await fetch(
+      "/Login",
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, password})
+      }
+    );
+    const response = await result.json();
+    if(response.error){
+      errorText.innerText = response.error;
+      hideLoadingScreen();
+    }else{
+      sessionStorage.setItem("accessToken", response);      
+      errorText.innerText = "Successful login";
+      window.location.href = "/Home";
+    }
+  } catch (error) {
+    errorText.innerText = "Invalid login details.";
+    hideLoadingScreen();
+  }
 }
 
-// loginForm.addEventListener("submit", login);
+loginForm.addEventListener("submit", login);
