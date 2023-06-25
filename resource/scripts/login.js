@@ -14,30 +14,44 @@ const errorText = document.getElementById("errorText");
 const userName = document.getElementById("username");
 const userPassword = document.getElementById("password");
 
-function login(event) {
+async function login(event) {
     displayLoadingScreen();
+    // event.preventDefault(); // Prevent form submission from reloading the page'
+
+    // if(userName.value == "" || userPassword.value == ""){
+    //   errorText.innerText = "Please fill in both fields.";
+    //   hideLoadingScreen();
+    //   return;
+    // }
+    // const username = userName.value;
+    // const password = userPassword.value;
   
-    event.preventDefault(); // Prevent form submission from reloading the page
-    if(userName.value == "" || userPassword.value == ""){
-      errorText.innerText = "Please fill in both fields.";
-      hideLoadingScreen();
-      return;
-    }
-  
-    try {
-      // const response = await userService.login(userName.value, userPassword.value); // user35
-      // const data = await response.json();
+    // try {
+    //   const result = await fetch(
+    //     "./Login",
+    //     {
+    //         method: "POST",
+    //         headers: {"Content-Type": "application/json"},
+    //         body: JSON.stringify({username, password})
+    //     }
+    // );
+    // const response = await result.json();
+    // if(response.error){
 
-      setTimeout(function() {
-          window.location.href = "/Home";
-      }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
+    // }
+    // const token = 
+    
+
+    //   setTimeout(function() {
+    //       window.location.href = "/Home";
+    //   }, 2000); // Adjust the duration (in milliseconds) to match the shimmer effect animation duration
 
 
-      errorText.innerText = "";
-    } catch (error) {
-        errorText.innerText = "Invalid login details.";
-        hideLoadingScreen();
-    }
+    //   errorText.innerText = "";
+    // } catch (error) {
+    //     errorText.innerText = "Invalid login details.";
+    //     hideLoadingScreen();
+    // }
 }
 
-loginForm.addEventListener("submit", login);
+// loginForm.addEventListener("submit", login);
