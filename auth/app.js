@@ -2,13 +2,17 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
 const { dbConnection } = require('./api');
-const bouncer = require ('express-bouncer')(900000, 900000, 3);
+const bouncer = require('express-bouncer')(900000, 900000, 3);
 const getSecrets = require('./getSecrets') 
 const hash = require('./hash/hash')
 const db = require('./db/db')
+const { check, validationResult } = require('express-validator');
+const helmet = require('helmet');
 
 const app = express();
 app.use(json());
+app.use(helmet());
+app.use(helmet.xssFilter());
 
 let jwtToken;
 
@@ -27,7 +31,15 @@ async function initializeJwtToken() {
 
 initializeJwtToken();
 
-app.post('/login', bouncer.block, async (req, res) => {
+app.post('/login', bouncer.block, [
+  check('username').notEmpty().withMessage('Username is required'),
+  check('password').notEmpty().withMessage('Password is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { username, password } = req.body;
 
   try {
@@ -43,7 +55,15 @@ app.post('/login', bouncer.block, async (req, res) => {
   }
 });
 
-app.post('/register', bouncer.block, async (req, res) => {
+app.post('/register', bouncer.block, [
+  check('username').notEmpty().withMessage('Username is required'),
+  check('password').notEmpty().withMessage('Password is required')
+], async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const { username, password } = req.body;
 
   try {
@@ -57,9 +77,7 @@ app.post('/register', bouncer.block, async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 4000,
-  http = require('http'),
-  fs = require('fs');
+const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log(`Authentication server is running on port ${port}`);
 });
