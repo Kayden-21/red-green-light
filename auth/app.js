@@ -24,7 +24,8 @@ bouncer.blocked = function (req, res, _, remaining) {
 
 async function initializeJwtToken() {
   try {
-    jwtToken = await getSecrets.getSecret("prod/redgreenlight/jwt");
+    const jwtObject = await getSecrets.getSecret("prod/redgreenlight/jwt");
+    jwtToken = JSON.parse(jwtObject).jwt_token;
   } catch(error) {
     console.error("Error retrieving secret:", error);
   }

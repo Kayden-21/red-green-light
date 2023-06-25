@@ -1,5 +1,7 @@
 const express = require('express');
 const http = require('http');
+const db = require('./db/db');
+
 // const jwt = require('jsonwebtoken');
 
 const port = process.env.PORT || 3000;
@@ -10,6 +12,19 @@ app.use('/Home', homeRoute);
 
 const gameRoute = require('./routes/playRoute');
 app.use('/Play', gameRoute);
+
+app.get('/leaderboards', async (req, res) => {
+  try {
+
+    const leaderboard = await db.getLeaderboard();
+
+    res.json(leaderboard);
+    return;
+  } catch (error) {
+
+    res.status(500).send(error);
+  }
+});
 
 const leaderboardRoute = require('./routes/leaderboardRoute');
 app.use('/Leaderboard', leaderboardRoute);
@@ -28,5 +43,5 @@ app.use(express.static('css'));
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log(`listening on https://localhost:${port}`);
+    console.log(`listening on http://localhost:${port}`);
 });
