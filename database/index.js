@@ -42,18 +42,17 @@ const scripts = [
       ('kyle', 102)`
 ];
 
-let succeeded = false;
+let succeeded = true;
 
 for (const script of scripts) {
   
   dbConnection.query(script, function (err, results, fields) {
     if (err) {
       console.log(`A travesty has befallen us: ${err.message}`);
+      succeeded = false;
       return;
     }
   });
-
-  succeeded = true;
 }
 
 if (succeeded) {

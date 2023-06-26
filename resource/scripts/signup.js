@@ -50,7 +50,7 @@ async function signup(event) {
   const username = userName.value;
   const password = userPassword.value;
 
-  if(username == "" || password == ""){
+  if(!username || !password){
     errorText.innerText = "Please fill in both fields.";
     hideLoadingScreen();
     return;

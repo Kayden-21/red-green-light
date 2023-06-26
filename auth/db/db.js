@@ -23,7 +23,7 @@ async function initialize() {
         console.error('A travesty has befallen us: ' + err.message);
         return;
       }
-      console.log('Connected to MySQL.');
+      console.log('Authentication database connected');
     });
 
   } catch (error) {

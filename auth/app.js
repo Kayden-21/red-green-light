@@ -1,7 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
-const { dbConnection } = require('./api');
 const bouncer = require('express-bouncer')(900000, 900000, 5);
 const hash = require('./hash/hash')
 const db = require('./db/db')
@@ -67,7 +66,7 @@ app.post('/register', bouncer.block, [
   }
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.AUTH_PORT || 4000;
 app.listen(port, () => {
-  console.log(`Authentication server is running on port ${port}`);
+  console.log(`Authentication server is running: http://localhost:${port}`);
 });
