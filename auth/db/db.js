@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-const getSecrets = require('../getSecrets');
 const util = require('util');
 require('dotenv').config({path: '../.env'});
 

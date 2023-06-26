@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
 const { dbConnection } = require('./api');
 const bouncer = require('express-bouncer')(900000, 900000, 5);
-const getSecrets = require('./getSecrets') 
 const hash = require('./hash/hash')
 const db = require('./db/db')
 const { check, validationResult } = require('express-validator');
