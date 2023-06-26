@@ -39,7 +39,7 @@ async function login(event) {
     errorText.innerText = response.error;
     hideLoadingScreen();
   }else{
-    // sessionStorage.setItem("accessToken", response);  
+    sessionStorage.setItem("accessToken", response.token);  
     errorText.innerText = "Successful login";
     window.location.href = "/Home";
   }

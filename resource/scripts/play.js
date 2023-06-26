@@ -8,12 +8,16 @@ function hideLoadingScreen() {
 }
 // END OF LOADING SCREEN -------------------------------------------
 
-let counterElement = document.getElementById("counter");
-let livesElement = document.getElementById("lives");
-let timerElement = document.getElementById("timer");
-let startButton = document.getElementById("startButton");
-let quitButton = document.getElementById("quitButton");
-let trafficLight = document.getElementById("trafficLightImage");
+const counterElement = document.getElementById("counter");
+const livesElement = document.getElementById("lives");
+const timerElement = document.getElementById("timer");
+const startButton = document.getElementById("startButton");
+const quitButton = document.getElementById("quitButton");
+const trafficLight = document.getElementById("trafficLightImage");
+const playSection = document.getElementById("playSection");
+const resultsSection = document.getElementById("resultsSection");
+const clicksResults = document.getElementById("clicksResults");
+const resultsTitle = document.getElementById("resultsTitle");
 
 let counter;
 let lives;
@@ -25,10 +29,22 @@ let randomTimeInterval;
 let timeToReset;
 let isRed;
 
+startButton.innerText = "Start";
+
 function resetGame(){
   lives = 3;
+  livesElement.textContent = lives;
+
   counter = 0;
+  counterElement.textContent = counter;  
+
   timeLeft = 20;
+  timerElement.innerText = timeLeft + " seconds";
+  playSection.classList.remove("hidden");
+  resultsSection.classList.add("hidden");
+
+  startButton.classList.remove("disabled");
+
   redTimeLeft = 11;
   greenTimeLeft = 9;
   isRunning = false;
@@ -58,9 +74,7 @@ function startGame() {
 
       if (timeLeft <= 0) {
         clearInterval(countdown);
-        isRunning = false;
-        startButton.classList.remove("disabled");
-        startButton.classList.add("shimmer");
+        activateEndOfGameState();
       }
 
       if(isRed){
@@ -82,18 +96,82 @@ function startGame() {
       if(randomTimeInterval <= 0){
         resetRandomTimeInterval();
       }
+
+      if(lives <= 0){
+        lives = 0;
+        clearInterval(countdown);
+        activateEndOfGameState();
+      }
     }, 1000);
   }
+}
+
+function activateEndOfGameState() {
+  isRunning = false;
+  playSection.classList.add("hidden");
+  resultsSection.classList.remove("hidden");
+  
+  if(lives > 0){
+    displayLoadingScreen();
+    resultsTitle.innerText = "GAME OVER - YOU WIN :)";
+    solidTrafficLight("green");
+    clicksResults.innerText = "SCORE: " + counter;
+    sendResults();
+  }else{
+    resultsTitle.innerText = "GAME OVER - YOU LOSE :(";
+    solidTrafficLight("red");
+    clicksResults.innerText = "";
+  }
+  startButton.classList.remove("disabled");
+  startButton.classList.add("shimmer");
+  startButton.innerText = "Play Again";
+}
+
+function updateStatText(){
+  livesElement.textContent = lives;
+  counterElement.textContent = counter;  
 }
 
 function incrementCounter() {
   if (isRunning) {
     if(trafficLight.getAttribute('src') == "./traffic-light-red.png"){
-      lives--;
-      livesElement.textContent = lives;
+      if(lives > 0){
+        lives--;      
+      }else{
+        lives = 0;
+      }
     }else if(trafficLight.getAttribute('src') == "./traffic-light-green.png"){
-      counter++;
-      counterElement.textContent = counter;  
+      counter++;      
+    }
+    updateStatText();
+  }
+}
+
+async function sendResults(){
+  const score = counter;
+  const token = sessionStorage.getItem("accessToken");
+  const urlWithParams = "/Username/GetUsername?token=" + token;
+  const result = await fetch(urlWithParams);
+  const resultData = await result.json();
+
+  if(resultData.error){
+    window.location.href = "/Login";
+  }else{
+    const username = resultData;
+    const result = await fetch(
+      "/leaderboards",
+      {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({username, score})
+      }
+    );
+    const response = await result.json();
+    if(response.error){
+      hideLoadingScreen();
+      // feels bad :)
+    }else{
+      hideLoadingScreen();
     }
   }
 }
