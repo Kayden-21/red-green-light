@@ -42,3 +42,12 @@ form p a{
     color: var(--dark-primary-color);
     font-weight: bold;
 }
+
+#loadingLabel{
+    font-family: var(--accent-font);
+    font-size: 5rem;
+    position: absolute;
+    margin: auto;
+    text-align: center;
+    padding-top: 40vh;
+}
