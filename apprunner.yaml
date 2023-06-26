@@ -1,0 +1,7 @@
+build:
+  commands:
+    pre-build:
+      - yum install node
+    build:
+      - cd auth
+      - npm install
