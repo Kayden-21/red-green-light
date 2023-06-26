@@ -8,7 +8,7 @@ const hash = require('./hash/hash')
 const db = require('./db/db')
 const { check, validationResult } = require('express-validator');
 const helmet = require('helmet');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
 
 const app = express();
 app.use(json());

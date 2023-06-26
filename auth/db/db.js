@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 const getSecrets = require('../getSecrets');
 const util = require('util');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
 
 
 // Initialize the connection object here so it can be used in registerUser
@@ -11,7 +11,6 @@ async function initialize() {
   try {
     
     // Establish a new connection to the MySQL database
-    console.log(process.env.DB_HOST);
     connection = mysql.createConnection({
       host: process.env.DB_HOST,
       user: process.env.DB_USER,

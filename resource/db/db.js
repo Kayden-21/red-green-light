@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const util = require('util');
-require('dotenv').config();
+require('dotenv').config({path: '../.env'});
 
 // Initialize the connection object here so it can be used in registerUser
 let connection;
