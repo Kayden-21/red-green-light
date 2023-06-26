@@ -1,4 +1,4 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const config = require('./config.js');
 
 const dbConnection = mysql.createConnection(config);
@@ -23,11 +23,6 @@ const scripts = [
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY(login_id)
   )`,
-  `INSERT INTO login (login_username, login_password) 
-    VALUES 
-      ('user', 'userpass'),
-      ('kyle', 'kylepass'),
-      ('matt', 'mattpass')`,
   'USE gamedatabase',
   `CREATE TABLE IF NOT EXISTS leaderboard (
     leaderboard_id INT AUTO_INCREMENT,
@@ -35,25 +30,19 @@ const scripts = [
     leaderboard_score INT,
     PRIMARY KEY(leaderboard_id)
   )`,
-  `INSERT INTO leaderboard (leaderboard_username, leaderboard_score)
-    VALUES
-      ('user', 16),
-      ('matt', 24),
-      ('kyle', 102)`
 ];
 
-let succeeded = false;
+let succeeded = true;
 
 for (const script of scripts) {
   
   dbConnection.query(script, function (err, results, fields) {
     if (err) {
       console.log(`A travesty has befallen us: ${err.message}`);
+      succeeded = false;
       return;
     }
   });
-
-  succeeded = true;
 }
 
 if (succeeded) {

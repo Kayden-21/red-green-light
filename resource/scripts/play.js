@@ -150,7 +150,7 @@ function incrementCounter() {
 async function sendResults(){
   const score = counter;
   const token = sessionStorage.getItem("accessToken");
-  const urlWithParams = "/Username/GetUsername?token=" + token;
+  const urlWithParams = "/Utility/GetUsername?token=" + token;
   const result = await fetch(urlWithParams);
   const resultData = await result.json();
 

@@ -3,8 +3,9 @@ const session = require('express-session');
 const http = require('http');
 const bodyParser = require('body-parser');
 const db = require('./db/db');
+require('dotenv').config({path: '../.env'});
 
-const port = process.env.PORT || 3000;
+const port = process.env.GAME_PORT || 3000;
 const app = express();
 
 app.use(bodyParser.json());
@@ -12,7 +13,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(session({
-    secret: 'SOSECRET', 
+    secret: process.env.SESSION_SECRET, 
     resave: true, 
     saveUninitialized: true
 }));
@@ -40,8 +41,8 @@ app.post('/leaderboards', async (req, res) => {
   }
 });
 
-const authRoute = require('./routes/authRoute');
-app.use('/Username', authRoute);
+const authRoute = require('./routes/utilityRoute');
+app.use('/Utility', authRoute);
 
 const homeRoute = require('./routes/homeRoute');
 app.get('/', (req, res) => {res.redirect('/Home');});
@@ -72,5 +73,5 @@ app.use(express.static('css'));
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log(`listening on http://localhost:${port}`);
+    console.log(`Game server is running: http://localhost:${port}`);
 });

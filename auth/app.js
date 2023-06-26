@@ -1,9 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
-const { dbConnection } = require('./api');
 const bouncer = require('express-bouncer')(900000, 900000, 5);
-const getSecrets = require('./getSecrets') 
 const hash = require('./hash/hash')
 const db = require('./db/db')
 const { check, validationResult } = require('express-validator');
@@ -19,7 +17,7 @@ let jwtToken = process.env.JWT;
 
 // Function to handle bouncer blocked requests
 bouncer.blocked = function (req, res, _, remaining) {
-    res.status(429).send("Too many requests have been made, please wait " + remaining / 1000 + " seconds");
+  res.status(429).json({error: "Too many requests have been made, please wait " + remaining / 1000 + " seconds"});
 };
 
 
@@ -68,7 +66,7 @@ app.post('/register', bouncer.block, [
   }
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.AUTH_PORT || 4000;
 app.listen(port, () => {
-  console.log(`Authentication server is running on port ${port}`);
+  console.log(`Authentication server is running: http://localhost:${port}`);
 });

@@ -1,5 +1,4 @@
-const mysql = require('mysql');
-const getSecrets = require('../getSecrets');
+const mysql = require('mysql2');
 const util = require('util');
 require('dotenv').config({path: '../.env'});
 
@@ -24,7 +23,7 @@ async function initialize() {
         console.error('A travesty has befallen us: ' + err.message);
         return;
       }
-      console.log('Connected to MySQL.');
+      console.log('Authentication database connected');
     });
 
   } catch (error) {
