@@ -34,7 +34,7 @@ app.post('/leaderboards', async (req, res) => {
       res.status(200).json('Successfully submitted game');
       return;
     }
-    res.status(500).json('Error submitting game');
+    res.status(500).json({error:'Error submitting game'});
   } catch (error) {
     return res.status(500).json(error);
   }
