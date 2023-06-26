@@ -4,7 +4,23 @@ main{
     flex-wrap: wrap;
 }
 
-main img{
+article{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+article:nth-child(1){
+    flex-grow: 1;
+    justify-content: flex-end;
+}
+article:nth-child(2){
+    flex-grow: 2;
+    justify-content: flex-start;
+}
+
+img{
     width: 40vw;
     max-width: 20rem;
     max-height: 20rem;
@@ -24,6 +40,10 @@ section{
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+section.hidden{
+    display:none;
 }
 
 #counterElements{
@@ -48,4 +68,13 @@ button.disabled{
     cursor: default;
     pointer-events: none;
     opacity: 0.5;
+}
+
+@media (max-height: 800px){
+    article:nth-child(1){
+        justify-content: center;
+    }
+    article:nth-child(2){
+        justify-content: center;
+    }
 }
