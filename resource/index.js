@@ -40,8 +40,8 @@ app.post('/leaderboards', async (req, res) => {
   }
 });
 
-const authRoute = require('./routes/authRoute');
-app.use('/Username', authRoute);
+const authRoute = require('./routes/utilityRoute');
+app.use('/Utility', authRoute);
 
 const homeRoute = require('./routes/homeRoute');
 app.get('/', (req, res) => {res.redirect('/Home');});
