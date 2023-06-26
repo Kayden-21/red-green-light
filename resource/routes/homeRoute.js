@@ -1,19 +1,33 @@
 const express = require('express');
 const path = require('path');
-const gameRouter = express.Router();
+const userService = require('../services/userServices');
+const homeRouter = express.Router();
 
-gameRouter.get('/', async function (req, res) {
-
-    const token = req.session.token;
-    console.log(token)
-
-    // TODO: Check auth with token
-
-    // if auth succeeds:
-    res.sendFile(path.join(__dirname, '../views/home.html'));
-    
-    // // if auth fails: 
-    // res.redirect('Login')
+homeRouter.get('/', async function (req, res) {
+    const verifiedToken = await userService.verifyToken(req.session.token); 
+    if(verifiedToken.error){
+        // const error = verifiedToken.error;
+        // return res.redirect(401, '/Login'); // gives cool error but meh ux
+        return res.redirect('/Login');
+    }else{
+        return res.sendFile(path.join(__dirname, '../views/home.html'));
+    }
 });
 
-module.exports = gameRouter;
+homeRouter.post('/', async function (req, res) {
+    const sessionToken = req.body;
+    if(sessionToken != null){
+        const token = await userService.verifyToken((sessionToken).token); 
+        if(token.error){
+            // return res.redirect(401, '/Login'); // gives cool error but meh ux
+            return res.redirect('/Login');
+        }else{
+            return res.redirect('/Home');
+        }
+    }else{
+        // return res.redirect(401, '/Login'); // gives cool error but meh ux
+        return res.redirect('/Login');
+    }
+});
+
+module.exports = homeRouter;

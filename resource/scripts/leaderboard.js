@@ -6,11 +6,17 @@ function displayLoadingScreen() {
 function hideLoadingScreen() {
     loadingSection.classList.remove("display");
 }
-hideLoadingScreen();
+displayLoadingScreen();
 // END OF LOADING SCREEN -------------------------------------------
 
-// SAMPLE DATA - TO REPLACE!
-window.addEventListener('load', async () => {
+const homeButton = document.getElementById("homeButton");
+if (homeButton != null) {
+  homeButton.addEventListener("click", function () {
+    window.location.href = "/Home";
+  });
+}
+
+async function getLeaderboard(){
   const response = await fetch('/leaderboards');
   const leaderboardData = await response.json();
 
@@ -30,11 +36,7 @@ window.addEventListener('load', async () => {
     }
     leaderboardBody.appendChild(row);
   });
+  hideLoadingScreen();
+}
 
-  const homeButton = document.getElementById("homeButton");
-  if (homeButton != null) {
-    homeButton.addEventListener("click", function () {
-      window.location.href = "/Home";
-    });
-  }
-});
+window.addEventListener('load', getLeaderboard());
