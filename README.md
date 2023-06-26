@@ -18,7 +18,7 @@ Now that we have MySQL primed and ready, create a new database connection. You c
 
 ![Create Connection](readme_images/create_connection.png)
 
-Test the connection to make sure it works (using the password for your root account) and click OK
+Test the connection to make sure it works (using the password for your root account) and click OK.
 
 ---
 
