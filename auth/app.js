@@ -68,5 +68,5 @@ app.post('/register', bouncer.block, [
 
 const port = process.env.AUTH_PORT || 4000;
 app.listen(port, () => {
-  console.log(`Authentication server is running on port ${port}`);
+  console.log(`Authentication server is running: http://localhost:${port}`);
 });

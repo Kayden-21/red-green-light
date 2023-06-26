@@ -73,5 +73,5 @@ app.use(express.static('css'));
 const server = http.createServer(app);
 
 server.listen(port, () => {
-    console.log(`Game server is running on port ${port}`);
+    console.log(`Game server is running: http://localhost:${port}`);
 });
