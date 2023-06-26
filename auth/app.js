@@ -17,7 +17,7 @@ let jwtToken = process.env.JWT;
 
 // Function to handle bouncer blocked requests
 bouncer.blocked = function (req, res, _, remaining) {
-    res.status(429).send("Too many requests have been made, please wait " + remaining / 1000 + " seconds");
+  res.status(429).json({error: "Too many requests have been made, please wait " + remaining / 1000 + " seconds"});
 };
 
 
