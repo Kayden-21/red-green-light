@@ -22,7 +22,7 @@ app.get('/leaderboards', async (req, res) => {
     const leaderboard = await db.getLeaderboard();
     res.json(leaderboard);
   } catch (error) {
-    return res.status(500).send(error);
+    return res.status(500).json(error);
   }
 });
 
@@ -31,16 +31,17 @@ app.post('/leaderboards', async (req, res) => {
     const { username, score } = req.body;
     const success = db.submitGame(username, score);
     if (success) {
-      res.status(200).send('Successfully submitted game');
+      res.status(200).json('Successfully submitted game');
       return;
     }
-
-    res.status(500).send('Error submitting game');
+    res.status(500).json('Error submitting game');
   } catch (error) {
-
-    return res.status(500).send(error);
+    return res.status(500).json(error);
   }
 });
+
+const authRoute = require('./routes/authRoute');
+app.use('/Username', authRoute);
 
 const homeRoute = require('./routes/homeRoute');
 app.get('/', (req, res) => {res.redirect('/Home');});
