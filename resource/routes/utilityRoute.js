@@ -19,4 +19,9 @@ authRouter.get('/GetUsername', async function (req, res) {
     }
 });
 
+authRouter.get('/Logout', async function (req, res) {
+    req.session.token = null;
+    return res.status(200).json("Successfully logged out."); 
+});
+
 module.exports = authRouter;

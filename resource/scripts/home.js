@@ -23,10 +23,15 @@ if(leaderboardButton != null){
     });
 }
 
+async function logout(event) {
+    event.preventDefault();
+    displayLoadingScreen();
+    sessionStorage.clear();
+
+    const result = await fetch("/Utility/Logout");
+    const response = await result.json();
+    window.location.href = "/Home";
+  }
+
 const logoutButton = document.getElementById("logoutButton");
-if(logoutButton != null){
-    logoutButton.addEventListener("click", function () {
-        window.location.href = "/Login";
-        // NEED TO ADD WAY MORE LOGOUT CODE HERE OBVS
-    });
-}
+logoutButton.addEventListener("click", logout);  
