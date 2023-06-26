@@ -1,6 +1,7 @@
 const mysql = require('mysql');
 const getSecrets = require('../getSecrets');
 const util = require('util');
+require('dotenv').config();
 
 
 // Initialize the connection object here so it can be used in registerUser
@@ -8,21 +9,15 @@ let connection;
 
 async function initialize() {
   try {
-    const [dbHostdetails, dbConnectiondetails] = await Promise.all([
-      getSecrets.getSecret("prod/redgreenlight/dbHostdetails"),
-      getSecrets.getSecret("rds!db-dafec5a1-0166-4a56-a1c8-9d77032fdafd"),
-    ]);
-
-    const parsedHostDetails = JSON.parse(dbHostdetails);
-    const parsedConnectionDetails = JSON.parse(dbConnectiondetails);
-
+    
     // Establish a new connection to the MySQL database
+    console.log(process.env.DB_HOST);
     connection = mysql.createConnection({
-      host: parsedHostDetails.DBHost,
-      user: parsedConnectionDetails.username,
-      password: parsedConnectionDetails.password,
-      port: parsedHostDetails.Port,
-      database: "authdatabase",
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      port: process.env.DB_PORT,
+      database: process.env.DB_AUTH
     });
 
     connection.connect((err) => {

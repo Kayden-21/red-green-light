@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config({ path: 'config.env' });
-let url = process.env.AUTHURL;
+require('dotenv').config();
+let url = process.env.AUTH_URL;
 
 
 const userService = {

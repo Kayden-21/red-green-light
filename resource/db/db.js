@@ -1,6 +1,6 @@
 const mysql = require('mysql');
 const util = require('util');
-require('dotenv').config({ path: 'config.env' });
+require('dotenv').config();
 
 // Initialize the connection object here so it can be used in registerUser
 let connection;
@@ -9,13 +9,12 @@ async function initialize() {
   try {
 
     // Establish a new connection to the MySQL database
-    console.log(process.env.DBSERVER)
     connection = mysql.createConnection({
-      host: process.env.DBSERVER,
-      user: process.env.DBUSER,
-      password: process.env.DBPASSWORD,
-      port: process.env.DBPORT,
-      database: "gamedatabase",
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      port: process.env.DB_PORT,
+      database: process.env.DB_GAME,
     });
 
     connection.connect((err) => {

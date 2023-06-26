@@ -2,35 +2,26 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const { json } = require('body-parser');
 const { dbConnection } = require('./api');
-const bouncer = require('express-bouncer')(900000, 900000, 20); // REMEMBER TO CHANGE BACK TO 3
+const bouncer = require('express-bouncer')(900000, 900000, 5);
 const getSecrets = require('./getSecrets') 
 const hash = require('./hash/hash')
 const db = require('./db/db')
 const { check, validationResult } = require('express-validator');
 const helmet = require('helmet');
+require('dotenv').config();
 
 const app = express();
 app.use(json());
 app.use(helmet());
 app.use(helmet.xssFilter());
 
-let jwtToken;
+let jwtToken = process.env.JWT;
 
 // Function to handle bouncer blocked requests
 bouncer.blocked = function (req, res, _, remaining) {
     res.status(429).send("Too many requests have been made, please wait " + remaining / 1000 + " seconds");
 };
 
-async function initializeJwtToken() {
-  try {
-    const jwtObject = await getSecrets.getSecret("prod/redgreenlight/jwt");
-    jwtToken = JSON.parse(jwtObject).jwt_token;
-  } catch(error) {
-    console.error("Error retrieving secret:", error);
-  }
-}
-
-initializeJwtToken();
 
 app.post('/login', bouncer.block, [
   check('username').notEmpty().withMessage('Username is required'),
@@ -48,7 +39,7 @@ app.post('/login', bouncer.block, [
     }
 
     bouncer.reset(req);
-    const token = jwt.sign({ userName: username }, jwtToken, { expiresIn: '1h' });
+    const token = jwt.sign({ userName: username }, jwtToken, { expiresIn: '20m' });
     res.json({ token });
   } catch(error) {
     res.status(500).json({ error: 'An error occurred during login' });
