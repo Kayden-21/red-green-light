@@ -1,5 +1,7 @@
-let url = "http://localhost:4000";
 const jwt = require('jsonwebtoken');
+require('dotenv').config({ path: 'config.env' });
+let url = process.env.AUTHURL;
+
 
 const userService = {
     login: async ({username, password}) => {
@@ -26,7 +28,7 @@ const userService = {
     },
     verifyToken: async (token) => {
         try{
-            const decoded = jwt.verify(token, "6b9d56e33e9428a65a669bde925193d588b2657c");
+            const decoded = jwt.verify(token, process.env.JWT);
             return decoded; 
         }catch(error){
             return {error};
