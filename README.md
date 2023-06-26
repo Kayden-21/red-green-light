@@ -22,4 +22,41 @@ Test the connection to make sure it works (using the password for your root acco
 
 ---
 
+## Initializing the DB
+
+Ensure you have a `.env` file in your root folder `red-green-light/.env` with the following structure:
+
+```
+JWT={YOUR_JWT_KEY}
+DB_USER={YOUR_DB_USER}
+DB_PASSWORD={YOUR_DB_PASSWORD}
+DB_PORT=3306
+DB_HOST=127.0.0.1
+DB_AUTH=authdatabase
+DB_GAME=gamedatabase
+
+SESSION_SECRET={YOUR_SESSION_SECRET}
+
+AUTH_PORT=4000
+GAME_PORT=3000
+
+AUTH_URL=http://localhost:4000
+```
+
+If you setup your MySQL server (or the respective apps) on a different port, please ensure you change the information appropriately.
+
 To intitialize the database, navigate to `red-green-light/database` and run `npm start`. This will create all the necessary tables and databases.
+
+---
+
+## Starting the server
+
+Now all that's left to do is run the server. Make sure you're in the root folder `red-green-light` and run the bash script: `run.sh`. If you don't, please run the following commands in separate terminals:
+
+```bash
+cd auth/ && npm i && npm start
+```
+
+```bash
+cd resource/ && npm i && npm start
+```

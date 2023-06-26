@@ -1,12 +1,12 @@
 const jwt = require('jsonwebtoken');
-require('dotenv').config();
 require('dotenv').config({path: '../.env'});
 
+const authURL = process.env.AUTH_URL; 
 
 const userService = {
     login: async ({username, password}) => {
         const result = await fetch(
-            url + '/login', 
+            authURL + '/login', 
             {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
@@ -17,7 +17,7 @@ const userService = {
     },
     signup: async ({username, password}) => {
         const result = await fetch(
-            url + '/register', 
+            authURL + '/register', 
             {
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
