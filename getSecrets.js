@@ -1,7 +1,4 @@
 const AWS = require("aws-sdk");
-const credentials = require("./cred.json");
-
-AWS.config.update(credentials);
 
 async function getSecret(secretName) {
     const secretsManager = new AWS.SecretsManager({ region: "us-east-1" }); // Specify the appropriate AWS region
