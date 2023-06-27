@@ -2,7 +2,7 @@
 
 ## Requirements
 
-This project requires the use of `node version 18`. To install the latest version of node see https://nodejs.org/en/download. 
+This project requires the use of `node version 16`. Please ensure you have the correct version currently active. 
 
 Alternatively, use `node version manager` to use multiple versions of node: https://github.com/coreybutler/nvm-windows/releases
 

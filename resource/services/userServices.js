@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config({path: '../.env'});
 
+const fetch = require('node-fetch');
 const authURL = process.env.AUTH_URL; 
 
 const userService = {
