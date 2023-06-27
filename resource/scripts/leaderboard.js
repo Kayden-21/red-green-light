@@ -37,7 +37,17 @@ async function getLeaderboard(){
 
   for(const data of leaderboardData){
     const row = document.createElement("tr");
-    row.innerHTML = `<td>${data.rank}</td><td>${data.leaderboard_username}</td><td>${data.leaderboard_score}</td>`;
+    const rankCell = document.createElement("td");
+    const usernameCell = document.createElement("td");
+    const scoreCell = document.createElement("td");
+    
+    rankCell.textContent = data.rank;
+    usernameCell.textContent = data.leaderboard_username;
+    scoreCell.textContent = data.leaderboard_score;
+
+    row.appendChild(rankCell);
+    row.appendChild(usernameCell);
+    row.appendChild(scoreCell);
     leaderboardBody.appendChild(row);
   }
   hideLoadingScreen();
