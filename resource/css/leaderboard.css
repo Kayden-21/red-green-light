@@ -45,11 +45,6 @@ button{
     font-weight: bold;
 }
 
-#leaderboard tr.user-row{
-    background-color: var(--secondary-color);
-    color: var(--light-secondary-color);
-}
-
 #leaderboard thead th:first-child{
     border-top-left-radius: 0.5rem;
 }

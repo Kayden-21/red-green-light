@@ -19,23 +19,27 @@ if (homeButton != null) {
 async function getLeaderboard(){
   const response = await fetch('/leaderboards');
   const leaderboardData = await response.json();
-
+  let rank = 1;
   for (let i = 0; i < leaderboardData.length; i++) {
-    leaderboardData[i].rank = i + 1;
+    if(i > 0){
+      if(leaderboardData[i].leaderboard_score == leaderboardData[i-1].leaderboard_score){
+        leaderboardData[i].rank = leaderboardData[i-1].rank;
+      }else{
+        leaderboardData[i].rank = rank;
+      }
+    }else{
+      leaderboardData[i].rank = rank;
+    }
+    rank++;
   }
 
   const leaderboardBody = document.querySelector("#leaderboard tbody");
 
-  leaderboardData.forEach((data, index) => {
+  for(const data of leaderboardData){
     const row = document.createElement("tr");
-    if (index < 10) { // Is it okay for us to use innerHTML???? What are the security implications?
-      row.innerHTML = `<td class="rank">${data.rank}</td><td>${data.leaderboard_username}</td><td>${data.leaderboard_score}</td>`;
-    } else { // Add the user in red - need some more logic here to check if necessary.
-      row.classList.add("user-row");
-      row.innerHTML = `<td>${data.rank}</td><td>${data.leaderboard_username}</td><td>${data.leaderboard_score}</td>`;
-    }
+    row.innerHTML = `<td>${data.rank}</td><td>${data.leaderboard_username}</td><td>${data.leaderboard_score}</td>`;
     leaderboardBody.appendChild(row);
-  });
+  }
   hideLoadingScreen();
 }
 
