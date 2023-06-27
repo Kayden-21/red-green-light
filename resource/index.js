@@ -3,10 +3,19 @@ const session = require('express-session');
 const http = require('http');
 const bodyParser = require('body-parser');
 const db = require('./db/db');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const cors = require('cors');
 require('dotenv').config({path: '../.env'});
 
 const port = process.env.GAME_PORT || 3000;
 const app = express();
+
+app.use(helmet());
+app.use(cors({
+  origin: process.env.GAME_URL,
+  methods: ["GET", "POST"]
+}));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -17,6 +26,11 @@ app.use(session({
     resave: true, 
     saveUninitialized: true
 }));
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+});
+app.use(limiter);
 
 app.get('/leaderboards', async (req, res) => {
   try {
