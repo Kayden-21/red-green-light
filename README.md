@@ -100,6 +100,9 @@ The server will now be running on http://localhost:3000 (Game) and http://localh
 
 ## Authors
 
-Kayden Kara
-Jesse Van Der Merwe
-Jared Swanzen
+Kayden Kara  
+
+Jesse Van Der Merwe  
+
+Jared Swanzen  
+
