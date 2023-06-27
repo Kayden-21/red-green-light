@@ -59,6 +59,7 @@ AUTH_PORT=4000
 GAME_PORT=3000
 
 AUTH_URL=http://localhost:4000
+GAME_URL=http://localhost:3000
 ```
 
 If you setup your MySQL server (or the respective apps) on a different port, please ensure you change the information appropriately. **THERE SHOULD BE NO BRACES (`{}`) WHEN YOU'RE DONE**
